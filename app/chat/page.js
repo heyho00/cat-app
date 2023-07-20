@@ -1,7 +1,7 @@
 'use client'
 
-import Buttons from '@/component/Buttons';
-import MyAnswer from '@/component/MyAnswer';
+import Buttons from '@/components/Buttons';
+import MyAnswer from '@/components/MyAnswer';
 import React, { useState, useEffect } from 'react';
 
 const ChatPage = () => {
@@ -28,7 +28,7 @@ const ChatPage = () => {
   useEffect(() => {
   let timer;
   if (answer.length==1) {
-    let messages = [`${answer[0].toString().substring(0,2)}하군요 !`, '숫놈인가요 암놈인가요 !?'];
+    let messages = [`${answer[0].toString().substring(0,2)}하군 !`, '수컷인가 암컷인가 !?'];
     if (displayedMessages2.length < messages.length && !!answer[0]) {
       timer = setTimeout(() => {
         setDisplayedMessages2(messages.slice(0, displayedMessages2.length + 1));
@@ -41,7 +41,7 @@ const ChatPage = () => {
   useEffect(() => {
     let timer;
     if (answer.length==2) {
-      let messages = [`${answer[1]}!`, '기가 막히군요 !?'];
+      let messages = [`${answer[1]}!`, '기가 막히네 !'];
       if (displayedMessages3.length < messages.length && !!answer[0]) {
         timer = setTimeout(() => {
           setDisplayedMessages3(messages.slice(0, displayedMessages3.length + 1));
