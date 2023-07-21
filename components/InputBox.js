@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from "next/link";
 
-const InputBox = ({ inputValue, handleChange, submit }) => {
+const InputBox = ({ inputValue, handleChange, submit, answer }) => {
   return (
     <div className="flex flex-col space-y-3 mt-7">
       <div className="flex space-x-3">
@@ -10,7 +10,12 @@ const InputBox = ({ inputValue, handleChange, submit }) => {
           onChange={handleChange}
           className="border rounded p-2 w-full"
         />
-        <Link href="/result">
+        <Link
+          href={{
+            pathname: "/result",
+            query: { answer },
+          }}
+        >
           <button
             onClick={() => {
               submit(inputValue);

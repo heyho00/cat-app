@@ -2,11 +2,29 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+// import axios from "axios";
 
-const ResultPage = ({ catName }) => {
+import { cat_names } from "@/public/const/const";
+const ResultPage = () => {
+  // const router = useRouter();
+
+  // console.log(answer);
   const [typedText, setTypedText] = useState(""); // 타이핑되는 텍스트를 저장하는 상태
   const [showResult, setShowResult] = useState(false); // 결과 텍스트를 보여줄지 여부를 저장하는 상태
   const [dotVisible, setDotVisible] = useState(false); // 점이 깜빡이는 상태를 저장하는 상태
+  const [displayName, setDisplayName] = useState("");
+  const [catName, setCatName] = useState("");
+
+  const getRandomName = () => {
+    const names = cat_names; // 여기에 랜덤으로 노출할 이름들을 추가합니다.
+    const randomIndex = Math.floor(Math.random() * names.length);
+    return names[randomIndex];
+  };
+
+  useEffect(() => {
+    setDisplayName(getRandomName());
+  }, []);
 
   useEffect(() => {
     const targetText = "당신의 고양이 이름은"; // 타이핑할 문구
@@ -21,9 +39,9 @@ const ResultPage = ({ catName }) => {
         clearInterval(typingInterval); // 타이핑 완료 후 인터벌 종료
         setTimeout(() => {
           setShowResult(true); // 결과 텍스트를 보여주도록 상태 업데이트
-        }, 3000);
+        }, 4000);
       }
-    }, 100); // 타이핑 간격(ms)
+    }, 200); // 타이핑 간격(ms)
 
     const dotInterval = setInterval(() => {
       setDotVisible((prevVisible) => !prevVisible); // 점 깜빡이는 상태를 토글
@@ -42,6 +60,18 @@ const ResultPage = ({ catName }) => {
         setDotVisible(false); // 점 깜빡이는 상태를 false로 변경하여 깜빡이는 효과 중지
         clearInterval(resultDotInterval);
       }, 3000);
+
+      // axios
+      //   .post("/get-recommendation", {
+      //     answers: ["얌전해", "상남자", "english", "오렌지 컬러"],
+      //   })
+      //   .then((response) => {
+      //     // 서버에서 받은 추천된 텍스트를 displayName 상태로 설정
+      //     setDisplayName(response.data.recommendedText);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     }
   }, [showResult]);
 
@@ -69,8 +99,7 @@ const ResultPage = ({ catName }) => {
 
         {showResult && ( // 결과 텍스트를 보여줄 때에만 아래 텍스트 노출
           <div className="bg-slate-200 w-max p-2 rounded-lg shadow mt-4 text-4xl">
-            {catName || "해리"} 어때요 !?{" "}
-            {/* catName이 없으면 기본값으로 '해리' 표시 */}
+            {catName || displayName} 어때요 !?{" "}
           </div>
         )}
       </div>

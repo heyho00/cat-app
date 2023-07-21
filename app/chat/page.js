@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import Buttons from "@/components/Buttons";
 import InputBox from "@/components/InputBox";
 import MyAnswer from "@/components/MyAnswer";
@@ -14,10 +15,6 @@ const ChatPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [answer, setAnswer] = useState([]);
 
-  const submit = (n) => {
-    setAnswer([...answer, n]);
-  };
-
   const handleChange = (event) => {
     const value = event.target.value;
     if (value.length <= 20) {
@@ -26,6 +23,26 @@ const ChatPage = () => {
   };
 
   const chatContainerRef = useRef(null);
+
+  useEffect(() => {
+    const scrollToBottom = () => {
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop =
+          chatContainerRef.current.scrollHeight;
+      }
+    };
+
+    scrollToBottom();
+  }, [
+    displayedMessages,
+    displayedMessages2,
+    displayedMessages3,
+    displayedMessages4,
+  ]);
+
+  const submit = async (n) => {
+    setAnswer([...answer, n]);
+  };
 
   useEffect(() => {
     let timer;
@@ -63,11 +80,7 @@ const ChatPage = () => {
   useEffect(() => {
     let timer;
     if (answer.length === 2) {
-      let messages = [
-        `${answer[1]}!`,
-        "기가 막히네 !",
-        "영어가 좋아 한글이 좋아?",
-      ];
+      let messages = [`${answer[1]}!`, "기가 막히네 !", "나이는 몇살이니?"];
       if (displayedMessages3.length < messages.length && !!answer[0]) {
         timer = setTimeout(() => {
           setDisplayedMessages3(
@@ -83,7 +96,7 @@ const ChatPage = () => {
     let timer;
     if (answer.length === 3) {
       let messages = [
-        `알겠어, ${answer[2]}로 지어줄게!`,
+        `${answer[2]} ?! 그렇구나 ~`,
         "마지막으로 반영하고싶은 고양이의 특징이 뭐니?",
       ];
       if (displayedMessages4.length < messages.length && !!answer[0]) {
@@ -97,24 +110,25 @@ const ChatPage = () => {
     }
   }, [answer, displayedMessages4]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleGetRecommendation = async () => {
+    try {
+      const response = await axios.post("/get-recommendation", {
+        answers: answer,
+      });
+      const recommendedName = response.data.recommendedText;
+      // 추천된 고양이 이름을 사용하는 로직 추가
+      console.log("추천된 고양이 이름:", recommendedName);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    // This function will scroll the chat container to the bottom
-    const scrollToBottom = () => {
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTop =
-          chatContainerRef.current.scrollHeight;
-      }
-    };
-
-    scrollToBottom();
-  }, [
-    displayedMessages,
-    displayedMessages2,
-    displayedMessages3,
-    displayedMessages4,
-  ]);
-
-  console.log(answer, "답 -------");
+    if (answer.length === 4) {
+      handleGetRecommendation();
+    }
+  }, [answer, handleGetRecommendation]);
 
   return (
     <>
@@ -174,7 +188,7 @@ const ChatPage = () => {
               </>
             )}
             {displayedMessages3.length >= 3 && !answer[2] && (
-              <Buttons submit={submit} one={"한글"} two={"english"} />
+              <Buttons submit={submit} one={"3살 아래"} two={"3살 위"} />
             )}
             {answer[2] && (
               <>
@@ -195,6 +209,7 @@ const ChatPage = () => {
                 inputValue={inputValue}
                 handleChange={handleChange}
                 submit={submit}
+                answer={answer}
               />
             )}
           </div>
