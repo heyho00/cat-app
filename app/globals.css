@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0; /* Change to black color (for text) */
+  --background-start-rgb: 255, 240, 192; /* Change to a slightly lighter yellow (start of gradient) */
+  --background-end-rgb: 255, 200, 64; /* Change to a slightly lighter orange (end of gradient) */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,4 +14,35 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Add mobile responsiveness styles here */
+/* Example media query for mobile devices */
+@media screen and (max-width: 768px) {
+  .bg-white {
+    /* Adjust container width for mobile devices */
+    width: 90%;
+  }
+
+  .text-2xl {
+    /* Modify font sizes for mobile devices */
+    font-size: 1.5rem;
+  }
+
+  .chat-container {
+    /* Adjust container height for mobile devices */
+    max-height: 60vh;
+  }
+
+  /* Add more specific styles for mobile screens as needed */
 }

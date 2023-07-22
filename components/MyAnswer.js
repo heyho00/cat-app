@@ -14,7 +14,7 @@ const MyAnswer = ({ str }) => {
         />
       </div>
       <div className="flex justify-end">
-        <div className="bg-pink-500 text-white w-max p-2 rounded-lg shadow mt-2">
+        <div className="bg-yellow-500 text-white w-max p-2 rounded-lg shadow mt-2">
           {str}
         </div>
       </div>

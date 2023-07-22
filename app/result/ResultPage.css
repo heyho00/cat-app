@@ -1,0 +1,20 @@
+@media screen and (max-width: 768px) {
+  .text-4xl {
+    /* 모바일 화면에 맞게 폰트 크기 조정 */
+    font-size: 1.5rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to the logo image */
+.logo-image {
+  animation: fadeIn 1s ease-in-out;
+}

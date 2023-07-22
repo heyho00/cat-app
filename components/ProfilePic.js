@@ -6,7 +6,7 @@ const ProfilePic = () => {
       <Image
         width={100}
         height={100}
-        src="/images/cat-ai.png"
+        src="/images/logo-face.png"
         alt="프로필 사진"
         className="rounded-full w-16 h-16"
       />

@@ -2,14 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import axios from "axios";
+import axios from "axios";
+import "./ResultPage.css";
 
 import { cat_names } from "@/public/const/const";
 const ResultPage = () => {
-  // const router = useRouter();
-
-  // console.log(answer);
   const [typedText, setTypedText] = useState(""); // 타이핑되는 텍스트를 저장하는 상태
   const [showResult, setShowResult] = useState(false); // 결과 텍스트를 보여줄지 여부를 저장하는 상태
   const [dotVisible, setDotVisible] = useState(false); // 점이 깜빡이는 상태를 저장하는 상태
@@ -82,7 +81,7 @@ const ResultPage = () => {
 
         <div className="profile-image flex items-center">
           <Image
-            src="/images/cat-ai.png"
+            src="/images/logo-face.png"
             width={100}
             height={100}
             alt="프로필 사진"
@@ -98,9 +97,32 @@ const ResultPage = () => {
         </div>
 
         {showResult && ( // 결과 텍스트를 보여줄 때에만 아래 텍스트 노출
-          <div className="bg-slate-200 w-max p-2 rounded-lg shadow mt-4 text-4xl">
-            {catName || displayName} 어때요 !?{" "}
-          </div>
+          <>
+            <div className="bg-slate-200 w-max p-2 rounded-lg shadow mt-4 text-4xl">
+              {catName || displayName} 어때요 !?{" "}
+            </div>
+            <div className="flex flex-col items-center justify-center mt-4">
+              <Image
+                src="/images/logo.png"
+                width={300}
+                height={300}
+                alt="logo"
+                className="rounded-full w-80 mt-10 logo-image"
+              />
+
+              {/* 네이버 블로그 링크 추가 */}
+              <div className="mt-4">
+                <a
+                  href="https://blog.naver.com/golgol_tambourines"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 font-bold underline"
+                >
+                  네이버 블로그 방문하기
+                </a>
+              </div>
+            </div>
+          </>
         )}
       </div>
     </div>
