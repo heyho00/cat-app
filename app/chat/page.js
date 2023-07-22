@@ -139,7 +139,7 @@ const ChatPage = () => {
 
           <div
             ref={chatContainerRef}
-            className="overflow-y-auto"
+            className="overflow-y-auto scrollbar-hide"
             style={{ maxHeight: "80vh" }}
           >
             <ProfilePic />
