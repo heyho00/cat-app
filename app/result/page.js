@@ -3,12 +3,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import "./ResultPage.css";
+import { cat_names_male, cat_names_female } from "@/public/const/const";
 
-import { cat_names } from "@/public/const/const";
 const ResultPage = () => {
+  const params = useSearchParams();
   const [typedText, setTypedText] = useState(""); // 타이핑되는 텍스트를 저장하는 상태
   const [showResult, setShowResult] = useState(false); // 결과 텍스트를 보여줄지 여부를 저장하는 상태
   const [dotVisible, setDotVisible] = useState(false); // 점이 깜빡이는 상태를 저장하는 상태
@@ -16,13 +18,15 @@ const ResultPage = () => {
   const [catName, setCatName] = useState("");
 
   const getRandomName = () => {
-    const names = cat_names; // 여기에 랜덤으로 노출할 이름들을 추가합니다.
+    const names =
+      params.get("1") === "상남자" ? cat_names_male : cat_names_female; // 여기에 랜덤으로 노출할 이름들을 추가합니다.
     const randomIndex = Math.floor(Math.random() * names.length);
     return names[randomIndex];
   };
 
   useEffect(() => {
     setDisplayName(getRandomName());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

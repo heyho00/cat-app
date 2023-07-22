@@ -24,7 +24,7 @@ const InputBox = ({ inputValue, handleChange, submit, answer }) => {
           <Link
             href={{
               pathname: "/result",
-              query: { answer },
+              query: { 0: answer[0], 1: answer[1], 2: answer[2], 3: answer[3] },
             }}
           >
             <button
