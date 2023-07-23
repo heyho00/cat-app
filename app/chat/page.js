@@ -48,8 +48,8 @@ const ChatPage = () => {
     let timer;
     let messages = [
       "안녕, 난 캣피티.",
-      "죽이는 고양이 이름을 추천해줄게",
-      "고양이의 성격은 어떠니?",
+      "멋진 고양이 이름을 추천해줄게",
+      "성향이 개냥이니 독립냥이니?",
     ];
     if (displayedMessages.length < messages.length) {
       timer = setTimeout(() => {
@@ -62,10 +62,7 @@ const ChatPage = () => {
   useEffect(() => {
     let timer;
     if (answer.length === 1) {
-      let messages = [
-        `${answer[0].toString().substring(0, 2)}하군 !`,
-        "수컷이야 암컷이야 !?",
-      ];
+      let messages = [`${answer[0]}군 !`, "수컷이야 암컷이야 !?"];
       if (displayedMessages2.length < messages.length && !!answer[0]) {
         timer = setTimeout(() => {
           setDisplayedMessages2(
@@ -153,7 +150,7 @@ const ChatPage = () => {
             ))}
 
             {displayedMessages.length >= 3 && !answer[0] && (
-              <Buttons submit={submit} one={"발랄해"} two={"얌전해"} />
+              <Buttons submit={submit} one={"개냥이"} two={"독립냥이"} />
             )}
 
             {answer[0] && (
