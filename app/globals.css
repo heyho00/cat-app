@@ -10,9 +10,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 0, 0, 0; /* Change to black color (for text) */
+    --background-start-rgb: 255, 240, 192; /* Change to a slightly lighter yellow (start of gradient) */
+    --background-end-rgb: 255, 200, 64; /* Change to a slightly lighter orange (end of gradient) */
   }
 }
 
